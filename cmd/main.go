@@ -15,6 +15,7 @@ import (
 	"github.com/pkg/errors"
 	"gopkg.in/yaml.v2"
 	"livingit.de/code/git-commit/hook"
+	"livingit.de/code/git-commit/subcommands"
 )
 
 func main() {
@@ -25,6 +26,31 @@ func main() {
 		fmt.Println("uninstall 	- helps to uninstall git-commit-hook")
 		os.Exit(0)
 		return
+	}
+
+	if os.Args[1] == "install" {
+		if directoryExists(".git") {
+			err := subcommands.Install(".git")
+			if err != nil {
+				fmt.Println("error:", err)
+				os.Exit(1)
+			}
+			os.Exit(0)
+			return
+		} else {
+			fmt.Println("error: no git repository")
+			os.Exit(1)
+			return
+		}
+	}
+
+	if os.Args[1] == "uninstall" {
+		err := subcommands.Uninstall(".git")
+		if err != nil {
+			fmt.Println("error:", err)
+			os.Exit(1)
+		}
+		os.Exit(0)
 	}
 
 	commitMessageFile := os.Args[1]
@@ -72,8 +98,6 @@ func main() {
 		os.Exit(1)
 		return
 	}
-
-	fmt.Println(projectPath)
 
 	localConfig := fmt.Sprintf("%s/git-commit.yaml", projectPath)
 	if fileExists(localConfig) {
@@ -141,6 +165,16 @@ func fileExists(path string) bool {
 			return false
 		}
 		return true
+	}
+	return false
+}
+
+// directoryExists implements a lazy way to check for a directory
+func directoryExists(path string) bool {
+	if stat, err := os.Stat(path); err == nil || os.IsExist(err) {
+		if stat.IsDir() {
+			return true
+		}
 	}
 	return false
 }
