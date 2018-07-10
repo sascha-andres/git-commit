@@ -1,0 +1,42 @@
+project_name: git-commit
+builds:
+  - binary: git-commit-hook
+    main: ./cmd/main.go
+    goos:
+      - windows
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - x86
+
+checksum:
+  name_template: "{{ .ProjectName }}_checksums.txt"
+
+snapshot:
+  # Allows you to change the name of the generated snapshot
+  # releases. The following variables are available:
+  # - Commit
+  # - Tag
+  # - Timestamp
+  # Default is `SNAPSHOT-{{.Commit}}`.
+  name_template: SNAPSHOT-{{.Commit}}
+
+nfpm:
+    vendor: Sascha Andres
+    homepage: https://livingit.de
+    maintainer: Sascha Andres <sascha.andres@outlook.com>
+    description: git commit hook implementation
+    license: Apache 2.0
+    formats:
+      - deb
+    dependencies:
+      - git
+    bindir: /usr/local/bin
+
+release:
+  draft: true
+  github:
+      owner: sascha-andres
+      name: git-commit
+

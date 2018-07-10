@@ -37,6 +37,12 @@ lint:  fmt ## Run all the linters
 		--deadline=10m \
 		./...
 
+snapshot: ## Create snapshot build
+	goreleaser --skip-publish --rm-dist --snapshot
+
+release: ## Create release build
+	goreleaser --rm-dist
+
 build: ## build binary to .build folder
 	-rm -f .build/git-commit-hook
 	go build -o ".build/git-commit-hook" cmd/main.go
