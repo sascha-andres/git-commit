@@ -14,5 +14,6 @@ func (cfg *Configuration) validateBody(commitMessage []string) bool {
 			}
 		}
 	}
+	result = cfg.validateBodySeparation(commitMessage) && result
 	return result
 }

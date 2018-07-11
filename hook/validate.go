@@ -11,7 +11,6 @@ func (cfg *Configuration) Validate(commitMessage []string) (bool, error) {
 		return false, err
 	}
 	result := cfg.validateSubjectLine(filteredMessage[0])
-	result = cfg.validateBodySeparation(filteredMessage) && result
 	result = cfg.validateBody(filteredMessage) && result
 	result = cfg.validateOccurs(filteredMessage) && result
 	return result, nil
