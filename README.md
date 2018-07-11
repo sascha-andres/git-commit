@@ -2,7 +2,7 @@
 
 This project is a configurable commit-msg hook. You can either configure using a global configuration file of a repository configuration file. If both exist, repository file will be merged into global configuration file.
 
-The global configuration file is located in the HOME directory of the user and named `.git-commit.yaml` while the repository specific file is in the root of the repository and named `git-commit.yaml`.
+The global configuration file is located in the HOME directory of the user and named `.commit-hook.yaml` while the repository specific file is in the root of the repository and named `.commit-hook.yaml`.
 
 Both files have the same structure.
 
@@ -51,4 +51,7 @@ Essentially this just removes the hook, so it would remove any other hook also. 
 
 |Version|Description|
 |---|---|
+|0.2.0|configuration file is now named `.commit-hook.yaml`|
+||fix: project configuration now correctly located in repository root|
+||fix: run subject line length|
 |0.1.0|Initial version|
