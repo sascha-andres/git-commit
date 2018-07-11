@@ -1,4 +1,0 @@
----
-
-calls:
-  - gometalinter --vendor ./...

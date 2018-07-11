@@ -14,6 +14,8 @@ import (
 	"livingit.de/code/git-commit/hook"
 )
 
+const configFileName = ".commit-hook.yaml"
+
 // LoadConfig handles global and local configuration
 func LoadConfig() (*hook.Configuration, error) {
 	config, err := loadGlobalConfig()
@@ -40,7 +42,7 @@ func loadProjectConfiguration(commitMessageFile string, config *hook.Configurati
 		return nil, err
 	}
 
-	localConfig := fmt.Sprintf("%s/git-commit.yaml", projectPath)
+	localConfig := fmt.Sprintf("%s/%s", projectPath, configFileName)
 	if helper.FileExists(localConfig) {
 		data, err := ioutil.ReadFile(localConfig)
 		if err != nil {
@@ -70,7 +72,7 @@ func loadGlobalConfig() (*hook.Configuration, error) {
 		return nil, err
 	}
 
-	globalConfig := fmt.Sprintf("%s/.git-commit.yaml", home)
+	globalConfig := fmt.Sprintf("%s/%s", home, configFileName)
 	if helper.FileExists(globalConfig) {
 		data, err := ioutil.ReadFile(globalConfig)
 		if err != nil {

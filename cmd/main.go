@@ -23,21 +23,25 @@ func main() {
 
 	if os.Args[1] == "install" {
 		os.Exit(methods.InstallHook())
+		return
 	}
 
 	if os.Args[1] == "uninstall" {
 		os.Exit(methods.UninstallHook())
+		return
 	}
 
 	validationResult := validateInput()
 	if 0 != validationResult {
 		os.Exit(validationResult)
+		return
 	}
 
 	config, err := methods.LoadConfig()
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
+		return
 	}
 
 	commitMessageFile := os.Args[1]
@@ -52,10 +56,12 @@ func main() {
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
+		return
 	}
 
 	if !ok {
 		os.Exit(1)
+		return
 	}
 
 	os.Exit(0)
