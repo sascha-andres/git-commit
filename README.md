@@ -25,6 +25,28 @@ Both files have the same structure.
     occurs:                              # Match somewhere, check for existence
       - TICKET-[0-9]+                    # have a TICKET-1 as a match
 
+## Installation
+
+Put the binary into your path.
+
+## Use
+
+### install hook
+
+The application has a helper to install the hook:
+
+    git-commit-hook install
+
+You need to run this in the root of your project ( the folder containing the `.git` folder ). If there is an existing hook you have to force it ( `-f` ).
+
+### uninstall hook
+
+Similar to the installation process, there is an uninstall helper:
+
+    git-commit-hook uninstall
+
+Essentially this just removes the hook, so it would remove any other hook also. So be careful.
+
 ## History
 
 |Version|Description|
