@@ -9,6 +9,10 @@ func (cfg *Configuration) validateSubjectLine(subjectLine string) bool {
 		fmt.Println("error: no subject line provided")
 		result = false
 	}
+	if len(subjectLine) > cfg.SubjectLineLength {
+		fmt.Println(fmt.Sprintf("error: subject line is longer than [%d]", cfg.SubjectLineLength))
+		result = false
+	}
 	for _, r := range cfg.subjectCompiled {
 		if !r.Match([]byte(subjectLine)) {
 			fmt.Println(fmt.Sprintf("error: [%s] does not match [%s]", subjectLine, r.String()))
