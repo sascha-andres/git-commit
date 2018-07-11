@@ -8,7 +8,7 @@ func (cfg *Configuration) validateSubjectLine(subjectLine string) bool {
 		fmt.Println("error: no subject line provided")
 		result = false
 	}
-	for _, r := range cfg.firstLineCompiled {
+	for _, r := range cfg.subjectCompiled {
 		if !r.Match([]byte(subjectLine)) {
 			fmt.Println(fmt.Sprintf("error: [%s] does not match [%s]", subjectLine, r.String()))
 			result = false
