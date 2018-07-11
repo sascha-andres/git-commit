@@ -6,6 +6,8 @@ import (
 	"os"
 	"path/filepath"
 
+	"path"
+
 	"github.com/imdario/mergo"
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/pkg/errors"
@@ -24,9 +26,13 @@ func LoadConfig() (*hook.Configuration, error) {
 	}
 
 	commitMessageFile := os.Args[1]
-	config, err = loadProjectConfiguration(commitMessageFile, config)
+	prjConfig, err := loadProjectConfiguration(commitMessageFile, config)
 	if err != nil {
 		return nil, err
+	}
+
+	if config == nil {
+		config = prjConfig
 	}
 
 	if nil == config {
@@ -37,7 +43,7 @@ func LoadConfig() (*hook.Configuration, error) {
 
 // loadProjectConfiguration loads a project specific configuration
 func loadProjectConfiguration(commitMessageFile string, config *hook.Configuration) (*hook.Configuration, error) {
-	projectPath, err := filepath.Abs(filepath.Dir(commitMessageFile))
+	projectPath, err := filepath.Abs(path.Join(filepath.Dir(commitMessageFile), ".."))
 	if err != nil {
 		return nil, err
 	}
