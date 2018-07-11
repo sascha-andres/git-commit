@@ -13,6 +13,7 @@ type (
 		SeparateBody              bool     `yaml:"separate-body"`            // SeparateBody forces a blank line between subject and body
 		BodyLineLength            int      `yaml:"body-line-length"`         // BodyLineLength provides the ability to limit the body lines' length
 		EnforceBodyLineLength     bool     `yaml:"enforce-body-line-length"` // EnforceBodyLineLength determines whether to print a warning when body line length it too long or to error
+		ExternalChecks            []string `yaml:"calls"`                    // ExternalChecks contains a list of commands to execute
 
 		ignoreCompiled  []*regexp.Regexp
 		subjectCompiled []*regexp.Regexp
