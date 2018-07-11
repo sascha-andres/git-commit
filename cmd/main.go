@@ -4,18 +4,11 @@ import (
 	"fmt"
 	"os"
 
-	"io/ioutil"
-
-	"path/filepath"
-
 	"bufio"
 
-	"github.com/imdario/mergo"
-	homedir "github.com/mitchellh/go-homedir"
 	"github.com/pkg/errors"
-	"gopkg.in/yaml.v2"
-	"livingit.de/code/git-commit/hook"
-	"livingit.de/code/git-commit/subcommands"
+	"livingit.de/code/git-commit/cmd/helper"
+	"livingit.de/code/git-commit/cmd/methods"
 )
 
 func main() {
@@ -29,123 +22,39 @@ func main() {
 	}
 
 	if os.Args[1] == "install" {
-		if directoryExists(".git") {
-			err := subcommands.Install(".git")
-			if err != nil {
-				fmt.Println("error:", err)
-				os.Exit(1)
-			}
-			os.Exit(0)
-			return
-		} else {
-			fmt.Println("error: no git repository")
-			os.Exit(1)
-			return
-		}
+		os.Exit(methods.InstallHook())
+		return
 	}
 
 	if os.Args[1] == "uninstall" {
-		err := subcommands.Uninstall(".git")
-		if err != nil {
-			fmt.Println("error:", err)
-			os.Exit(1)
-		}
-		os.Exit(0)
+		os.Exit(methods.UninstallHook())
+		return
+	}
+
+	validationResult := validateInput()
+	if 0 != validationResult {
+		os.Exit(validationResult)
+		return
+	}
+
+	config, err := methods.LoadConfig()
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+		return
 	}
 
 	commitMessageFile := os.Args[1]
-	if commitMessageFile == "" {
-		fmt.Println(errors.New("no commit message file passed as parameter 1"))
-		os.Exit(1)
-		return
-	}
-
-	if !fileExists(commitMessageFile) {
-		fmt.Println(errors.New("passed commit message file not found"))
-		os.Exit(1)
-		return
-	}
-
-	// Find home directory.
-	home, err := homedir.Dir()
+	commitFileContent, err := loadCommitMessageFile(commitMessageFile)
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
-	var config *hook.Configuration
-	globalConfig := fmt.Sprintf("%s/.git-commit.yaml", home)
-	if fileExists(globalConfig) {
-		data, err := ioutil.ReadFile(globalConfig)
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-			return
-		}
-		var cfg hook.Configuration
-		err = yaml.Unmarshal(data, &cfg)
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-			return
-		}
-		config = &cfg
-	}
-
-	projectPath, err := filepath.Abs(filepath.Dir(commitMessageFile))
-	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 		return
 	}
 
-	localConfig := fmt.Sprintf("%s/git-commit.yaml", projectPath)
-	if fileExists(localConfig) {
-		data, err := ioutil.ReadFile(localConfig)
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-			return
-		}
-		var cfg hook.Configuration
-		err = yaml.Unmarshal(data, &cfg)
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-			return
-		}
-		if nil == config {
-			config = &cfg
-		} else {
-			if err := mergo.Merge(config, cfg); err != nil {
-				fmt.Println(err)
-				os.Exit(1)
-				return
-			}
-		}
-	}
-
-	if nil == config {
-		fmt.Println(errors.New("no suitable configuration found"))
-	}
-
-	file, err := os.Open(commitMessageFile)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-		return
-	}
-	scanner := bufio.NewScanner(file)
-	commitFileContent := make([]string, 0)
-	for scanner.Scan() {
-		commitFileContent = append(commitFileContent, scanner.Text())
-	}
-	if err := scanner.Err(); err != nil {
-		fmt.Fprintln(os.Stderr, "reading standard input:", err)
-	}
 	ok, err := config.Validate(commitFileContent)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 		return
 	}
@@ -158,23 +67,36 @@ func main() {
 	os.Exit(0)
 }
 
-// fileExists implements a lazy way to check for a file
-func fileExists(path string) bool {
-	if stat, err := os.Stat(path); err == nil || os.IsExist(err) {
-		if stat.IsDir() {
-			return false
-		}
-		return true
+// validateInput checks program oarameters when running
+// as a hook
+func validateInput() int {
+	commitMessageFile := os.Args[1]
+	if commitMessageFile == "" {
+		fmt.Fprintln(os.Stderr, errors.New("no commit message file passed as parameter 1"))
+		return 1
 	}
-	return false
+
+	if !helper.FileExists(commitMessageFile) {
+		fmt.Fprintln(os.Stderr, errors.New("passed commit message file not found"))
+		return 1
+	}
+	return 0
 }
 
-// directoryExists implements a lazy way to check for a directory
-func directoryExists(path string) bool {
-	if stat, err := os.Stat(path); err == nil || os.IsExist(err) {
-		if stat.IsDir() {
-			return true
-		}
+// loadCommitMessageFile reads the commit message and returns it as a
+// array containing the lines
+func loadCommitMessageFile(commitMessageFile string) ([]string, error) {
+	file, err := os.Open(commitMessageFile)
+	if err != nil {
+		return nil, err
 	}
-	return false
+	scanner := bufio.NewScanner(file)
+	commitFileContent := make([]string, 0)
+	for scanner.Scan() {
+		commitFileContent = append(commitFileContent, scanner.Text())
+	}
+	if err := scanner.Err(); err != nil {
+		return nil, err
+	}
+	return commitFileContent, nil
 }
