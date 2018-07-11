@@ -2,6 +2,7 @@ package hook
 
 import "fmt"
 
+// validateSubjectLine checks the subject line for configured patterns
 func (cfg *Configuration) validateSubjectLine(subjectLine string) bool {
 	result := true
 	if "" == subjectLine {

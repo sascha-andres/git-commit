@@ -2,6 +2,8 @@ package hook
 
 import "fmt"
 
+// validateOccurs checks whether required patterns are found in the commit message independently
+// of the place ( subject or body )
 func (cfg *Configuration) validateOccurs(commitMessage []string) bool {
 	result := true
 	for _, r := range cfg.occursCompiled {

@@ -2,6 +2,7 @@ package hook
 
 import "fmt"
 
+// validateBody runs all rules for a commit message body
 func (cfg *Configuration) validateBody(commitMessage []string) bool {
 	result := true
 	for _, line := range commitMessage {
