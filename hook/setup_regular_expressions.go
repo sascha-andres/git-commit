@@ -17,45 +17,46 @@ func (cfg *Configuration) setupRegularExpressions() error {
 
 // regexOccur compiles occur regular expressions
 func (cfg *Configuration) regexOccur() error {
-	if cfg.FindOccurrenceExpressions != nil && len(cfg.FindOccurrenceExpressions) > 0 {
-		cfg.occursCompiled = make([]*regexp.Regexp, 0)
-		for _, expr := range cfg.FindOccurrenceExpressions {
-			r, err := regexp.Compile(expr)
-			if err != nil {
-				return err
-			}
-			cfg.occursCompiled = append(cfg.occursCompiled, r)
-		}
+	c, err := loadExpressions(cfg.FindOccurrenceExpressions)
+	if err != nil {
+		return err
 	}
+	cfg.occursCompiled = c
 	return nil
 }
 
 // regexIgnore compiles ignore regular expressions
 func (cfg *Configuration) regexIgnore() error {
-	if cfg.IgnoreExpressions != nil && len(cfg.IgnoreExpressions) > 0 {
-		cfg.ignoreCompiled = make([]*regexp.Regexp, 0)
-		for _, expr := range cfg.IgnoreExpressions {
-			r, err := regexp.Compile(expr)
-			if err != nil {
-				return err
-			}
-			cfg.ignoreCompiled = append(cfg.ignoreCompiled, r)
-		}
+	c, err := loadExpressions(cfg.IgnoreExpressions)
+	if err != nil {
+		return err
 	}
+	cfg.ignoreCompiled = c
 	return nil
 }
 
 // regexSubject compiles regular expressions for the subject line
 func (cfg *Configuration) regexSubject() error {
-	if cfg.SubjectExpressions != nil && len(cfg.SubjectExpressions) > 0 {
-		cfg.subjectCompiled = make([]*regexp.Regexp, 0)
-		for _, expr := range cfg.SubjectExpressions {
+	c, err := loadExpressions(cfg.SubjectExpressions)
+	if err != nil {
+		return err
+	}
+	cfg.subjectCompiled = c
+	return nil
+}
+
+// loadExpressions compiles a list of regular expresisons to a list of Regexp
+func loadExpressions(expressions []string) ([]*regexp.Regexp, error) {
+	if len(expressions) > 0 {
+		compiled := make([]*regexp.Regexp, 0)
+		for _, expr := range expressions {
 			r, err := regexp.Compile(expr)
 			if err != nil {
-				return err
+				return nil, err
 			}
-			cfg.subjectCompiled = append(cfg.subjectCompiled, r)
+			compiled = append(compiled, r)
 		}
+		return compiled, nil
 	}
-	return nil
+	return nil, nil
 }
