@@ -1,5 +1,7 @@
 # git-commit
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/sascha-andres/git-commit)](https://goreportcard.com/report/github.com/sascha-andres/git-commit) [![Maintainability](https://api.codeclimate.com/v1/badges/89c3d725bc80fe513869/maintainability)](https://codeclimate.com/github/sascha-andres/git-commit/maintainability) [![codebeat badge](https://codebeat.co/badges/e26b8c40-1ada-41b7-82c6-4dd7e96edde0)](https://codebeat.co/projects/github-com-sascha-andres-git-commit-master)
+
 This project is a configurable commit-msg hook. You can either configure using a global configuration file of a repository configuration file. If both exist, repository file will be merged into global configuration file.
 
 The global configuration file is located in the HOME directory of the user and named `.commit-hook.yaml` while the repository specific file is in the root of the repository and named `.commit-hook.yaml`.
@@ -51,6 +53,7 @@ Essentially this just removes the hook, so it would remove any other hook also. 
 
 |Version|Description|
 |---|---|
+|0.3.1|integration with code quality tools|
 |0.3.0|print version information|
 |0.2.0|configuration file is now named `.commit-hook.yaml`|
 ||fix: project configuration now correctly located in repository root|
