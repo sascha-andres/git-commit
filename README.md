@@ -53,6 +53,7 @@ Essentially this just removes the hook, so it would remove any other hook also. 
 
 |Version|Description|
 |---|---|
+|0.3.1|integration with code quality tools|
 |0.3.0|print version information|
 |0.2.0|configuration file is now named `.commit-hook.yaml`|
 ||fix: project configuration now correctly located in repository root|
