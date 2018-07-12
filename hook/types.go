@@ -2,6 +2,7 @@ package hook
 
 import "regexp"
 
+// codebeat:disable[TOO_MANY_IVARS]
 type (
 	// Configuration is used to load global/per-project configuration
 	Configuration struct {
@@ -20,3 +21,5 @@ type (
 		occursCompiled  []*regexp.Regexp
 	}
 )
+
+// codebeat:enable[TOO_MANY_IVARS]
