@@ -9,6 +9,7 @@ builds:
     goarch:
       - amd64
       - x86
+    ldflags: -s -w -X livingit.de/code/git-commit/cmd/methods.versionNumber={{.Version}} -X livingit.de/code/git-commit/cmd/methods.commit={{.Commit}} -X livingit.de/code/git-commit/cmd/methods.date={{.Date}}
 
 checksum:
   name_template: "{{ .ProjectName }}_checksums.txt"

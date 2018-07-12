@@ -12,11 +12,10 @@ import (
 )
 
 func main() {
+	methods.PrintVersion()
+
 	if len(os.Args) < 2 {
-		fmt.Println("too few arguments")
-		fmt.Println("")
-		fmt.Println("install 	- helps to install git-commit-hook")
-		fmt.Println("uninstall 	- helps to uninstall git-commit-hook")
+		methods.Help()
 		os.Exit(0)
 		return
 	}
