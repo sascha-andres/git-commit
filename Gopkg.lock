@@ -25,9 +25,15 @@
   revision = "5420a8b6744d3b0345ab293f6fcba19c978f1183"
   version = "v2.2.1"
 
+[[projects]]
+  name = "livingit.de/code/versioned"
+  packages = ["."]
+  revision = "bcebc3ea7ebc449e4e00eed5e0eae80df2e5b679"
+  version = "1.0.0"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "c405766b29d1d708e1140220941c8dc54db0bbf7550a6c818a32baeaed989f35"
+  inputs-digest = "67d9f4ba14859b517224764934a28345465d5fcb14925413d070c02d6a3d19c0"
   solver-name = "gps-cdcl"
   solver-version = 1
