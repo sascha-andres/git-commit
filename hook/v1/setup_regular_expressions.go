@@ -1,4 +1,4 @@
-package hook
+package v1
 
 import (
 	"regexp"

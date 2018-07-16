@@ -1,26 +1,22 @@
-package methods
+package v1
 
-/*
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 
 	"path"
 
 	"github.com/imdario/mergo"
-	homedir "github.com/mitchellh/go-homedir"
 	"github.com/pkg/errors"
-	yaml "gopkg.in/yaml.v2"
-	"livingit.de/code/git-commit/cmd/helper"
-	"livingit.de/code/git-commit/hook"
+	"gopkg.in/yaml.v2"
+	"livingit.de/code/git-commit/hook/config"
 )
 
 const configFileName = ".commit-hook.yaml"
 
 // LoadConfig handles global and local configuration
-func LoadConfig() (*hook.Configuration, error) {
+func LoadConfig() (*Configuration, error) {
 	config, err := loadGlobalConfig()
 	if err != nil {
 		return nil, err
@@ -43,56 +39,43 @@ func LoadConfig() (*hook.Configuration, error) {
 }
 
 // loadProjectConfiguration loads a project specific configuration
-func loadProjectConfiguration(commitMessageFile string, config *hook.Configuration) (*hook.Configuration, error) {
+func loadProjectConfiguration(commitMessageFile string, globalConfig *Configuration) (*Configuration, error) {
 	projectPath, err := filepath.Abs(path.Join(filepath.Dir(commitMessageFile), ".."))
 	if err != nil {
 		return nil, err
 	}
 
 	localConfig := fmt.Sprintf("%s/%s", projectPath, configFileName)
-	if helper.FileExists(localConfig) {
-		data, err := ioutil.ReadFile(localConfig)
-		if err != nil {
-			return nil, err
-		}
-		var cfg hook.Configuration
-		err = yaml.Unmarshal(data, &cfg)
-		if err != nil {
-			return nil, err
-		}
-		if nil == config {
-			return &cfg, nil
-		}
-		if err := mergo.Merge(config, cfg); err != nil {
-			return nil, err
-		}
-		return config, nil
-	}
-	return nil, nil
-}
-
-// loadGlobalConfig loads the global configuration if present
-func loadGlobalConfig() (*hook.Configuration, error) {
-	// Find home directory.
-	home, err := homedir.Dir()
+	data, err := config.LoadProjectConfigFileContent(localConfig)
 	if err != nil {
 		return nil, err
 	}
-
-	globalConfig := fmt.Sprintf("%s/%s", home, configFileName)
-	if helper.FileExists(globalConfig) {
-		data, err := ioutil.ReadFile(globalConfig)
-		if err != nil {
-			return nil, err
-		}
-		var cfg hook.Configuration
+	if data != nil {
+		var cfg Configuration
 		err = yaml.Unmarshal(data, &cfg)
 		if err != nil {
 			return nil, err
 		}
-		return &cfg, nil
+		if nil == globalConfig {
+			return &cfg, nil
+		}
+		if err := mergo.Merge(globalConfig, cfg); err != nil {
+			return nil, err
+		}
 	}
-
-	return nil, nil
+	return globalConfig, nil
 }
-*/
+
+// loadGlobalConfig loads the global configuration if present
+func loadGlobalConfig() (*Configuration, error) {
+	data, err := config.LoadGlobalConfigFileContent()
+	if err != nil {
+		return nil, err
+	}
+	var cfg Configuration
+	err = yaml.Unmarshal(data, &cfg)
+	if err != nil {
+		return nil, err
+	}
+	return &cfg, nil
+}
