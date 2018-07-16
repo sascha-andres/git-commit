@@ -3,8 +3,8 @@ package v1
 import "regexp"
 
 type (
-	// codebeat:disable[TOO_MANY_IVARS]
 	// Configuration is used to load global/per-project configuration
+	// codebeat:disable[TOO_MANY_IVARS]
 	Configuration struct {
 		Version                   string   `yaml:"version"`                  // Version denotes the configuration file version
 		IgnoreExpressions         []string `yaml:"ignore"`                   // IgnoreExpressions is a list of regular expressions that determine whether a line should be checked or not
