@@ -1,4 +1,4 @@
-package hook
+package v1
 
 // filterCommitMessage removes all lines from the message to check that match configured patterns.
 // Usually you want to omit comments with something like ^#.*$

@@ -9,6 +9,7 @@ import (
 	"github.com/pkg/errors"
 	"livingit.de/code/git-commit/cmd/helper"
 	"livingit.de/code/git-commit/cmd/methods"
+	"livingit.de/code/git-commit/hook"
 )
 
 func main() {
@@ -36,7 +37,7 @@ func main() {
 		return
 	}
 
-	config, err := methods.LoadConfig()
+	config, err := hook.NewForVersion("1")
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)

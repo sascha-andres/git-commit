@@ -1,4 +1,4 @@
-package hook
+package v1
 
 // Validate validates the message against the rules
 func (cfg *Configuration) Validate(commitMessage []string) (bool, error) {
