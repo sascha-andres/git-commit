@@ -12,6 +12,8 @@ Both files have the same structure.
 
     ---
     
+    version: 1                           # version of config file
+    
     subject-line-length: 50              # Length of the subject line at a maximum
     body-required: false                 # Is a body required for a commit
     separate-body: true                  # Should the body be separated by a blank line
@@ -53,6 +55,7 @@ Essentially this just removes the hook, so it would remove any other hook also. 
 
 |Version|Description|
 |---|---|
+|0.4.0|add version to config file|
 |0.3.1|integration with code quality tools|
 |0.3.0|print version information|
 |0.2.0|configuration file is now named `.commit-hook.yaml`|
