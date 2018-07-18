@@ -17,12 +17,7 @@ func (cfg *Configuration) setupRegularExpressions() error {
 
 // regexOccur compiles occur regular expressions
 func (cfg *Configuration) regexOccur() error {
-	c, err := loadExpressions(cfg.FindOccurrenceExpressions)
-	if err != nil {
-		return err
-	}
-	cfg.occursCompiled = c
-	return nil
+	return loadExpressionsWithSeverity(cfg.FindOccurrenceExpressions)
 }
 
 // regexIgnore compiles ignore regular expressions
@@ -37,15 +32,10 @@ func (cfg *Configuration) regexIgnore() error {
 
 // regexSubject compiles regular expressions for the subject line
 func (cfg *Configuration) regexSubject() error {
-	c, err := loadExpressions(cfg.SubjectExpressions)
-	if err != nil {
-		return err
-	}
-	cfg.subjectCompiled = c
-	return nil
+	return loadExpressionsWithSeverity(cfg.SubjectExpressions)
 }
 
-// loadExpressions compiles a list of regular expresisons to a list of Regexp
+// loadExpressions compiles a list of regular expressions to a list of Regexp
 func loadExpressions(expressions []string) ([]*regexp.Regexp, error) {
 	if len(expressions) > 0 {
 		compiled := make([]*regexp.Regexp, 0)
@@ -59,4 +49,17 @@ func loadExpressions(expressions []string) ([]*regexp.Regexp, error) {
 		return compiled, nil
 	}
 	return nil, nil
+}
+
+// loadExpressionsWithSeverity compiles a list of regular expressions with severity
+func loadExpressionsWithSeverity(expressions []ExpressionWithSeverity) error {
+	if len(expressions) > 0 {
+		for _, expr := range expressions {
+			err := expr.setup()
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
 }

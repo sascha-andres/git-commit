@@ -6,17 +6,17 @@ import "fmt"
 // of the place ( subject or body )
 func (cfg *Configuration) validateOccurs(commitMessage []string) bool {
 	result := true
-	for _, r := range cfg.occursCompiled {
+	for _, r := range cfg.FindOccurrenceExpressions {
 		localOK := false
 		for _, line := range commitMessage {
-			if r.Match([]byte(line)) {
+			if r.match([]byte(line)) {
 				localOK = true
 				break
 			}
 		}
 		if !localOK {
-			fmt.Println(fmt.Sprintf("error: nothing found that matches [%s]", r.String()))
-			result = false
+			fmt.Println(fmt.Sprintf("%s: nothing found that matches [%s]", r.Severity, r.Expression))
+			result = result && r.Severity != ErrorSeverity
 		}
 	}
 	return result

@@ -13,10 +13,10 @@ func (cfg *Configuration) validateSubjectLine(subjectLine string) bool {
 		fmt.Println(fmt.Sprintf("error: subject line is longer than [%d]", cfg.SubjectLineLength))
 		result = false
 	}
-	for _, r := range cfg.subjectCompiled {
-		if !r.Match([]byte(subjectLine)) {
-			fmt.Println(fmt.Sprintf("error: [%s] does not match [%s]", subjectLine, r.String()))
-			result = false
+	for _, r := range cfg.SubjectExpressions {
+		if !r.match([]byte(subjectLine)) {
+			fmt.Println(fmt.Sprintf("%s: [%s] does not match [%s]", r.Severity, subjectLine, r.Expression))
+			result = result && r.Severity != ErrorSeverity
 		}
 	}
 	return result
