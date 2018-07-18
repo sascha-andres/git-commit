@@ -37,14 +37,14 @@ func main() {
 		return
 	}
 
-	config, err := hook.NewForVersion("1")
+	commitMessageFile := os.Args[1]
+	config, err := hook.NewForVersion(commitMessageFile)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 		return
 	}
 
-	commitMessageFile := os.Args[1]
 	commitFileContent, err := loadCommitMessageFile(commitMessageFile)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
