@@ -3,6 +3,9 @@ package config
 import (
 	"fmt"
 	"io/ioutil"
+	"path/filepath"
+
+	"path"
 
 	"github.com/mitchellh/go-homedir"
 	"livingit.de/code/git-commit/cmd/helper"
@@ -22,7 +25,11 @@ func LoadGlobalConfigFileContent() ([]byte, error) {
 
 // LoadProjectConfigFileContent reads data from the project configuration file
 func LoadProjectConfigFileContent(commitMessageFile string) ([]byte, error) {
-	return loadConfigFileContent(commitMessageFile)
+	projectPath, err := filepath.Abs(path.Join(filepath.Dir(commitMessageFile), ".."))
+	if err != nil {
+		return nil, err
+	}
+	return loadConfigFileContent(fmt.Sprintf("%s/%s", projectPath, configFileName))
 }
 
 // loadConfigFileContent returns the file content if the file exists

@@ -38,9 +38,11 @@ func NewForVersion(commitMessageFile string) (Validator, error) {
 // and returns the version after some validations
 func getVersion(commitMessageFile string) (string, error) {
 	global, globalVersion, err := getGlobalVersion()
+
 	if err != nil {
 		return "", err
 	}
+
 	local, localVersion, err := getLocalVersion(commitMessageFile)
 	if err != nil {
 		return "", err
