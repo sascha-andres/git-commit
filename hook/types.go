@@ -6,6 +6,7 @@ import (
 
 	"livingit.de/code/git-commit/hook/config"
 	"livingit.de/code/git-commit/hook/v1"
+	"livingit.de/code/git-commit/hook/v2"
 	"livingit.de/code/versioned"
 )
 
@@ -25,6 +26,8 @@ func NewForVersion(commitMessageFile string) (Validator, error) {
 	switch version {
 	case "1":
 		return v1.LoadConfig()
+	case "2":
+		return v2.LoadConfig()
 	case "":
 		return v1.LoadConfig()
 	}
