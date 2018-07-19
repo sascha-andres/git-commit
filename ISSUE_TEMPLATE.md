@@ -19,11 +19,17 @@ Have you read git-commit's Code of Conduct? By filing an Issue, you are expected
 2. [Second Step]
 3. [and so on...]
 
-**Expected behavior:** [What you expect to happen]
+**Expected behavior:** 
 
-**Actual behavior:** [What actually happens]
+[What you expect to happen]
 
-**Reproduces how often:** [What percentage of the time does it reproduce?]
+**Actual behavior:** 
+
+[What actually happens]
+
+**Reproduces how often:** 
+
+[What percentage of the time does it reproduce?]
 
 ### Versions
 

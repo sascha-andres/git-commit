@@ -9,8 +9,6 @@ import (
 	"livingit.de/code/git-commit/hook/config"
 )
 
-const configFileName = ".commit-hook.yaml"
-
 // LoadConfig handles global and local configuration
 func LoadConfig() (*Configuration, error) {
 	config, err := loadGlobalConfig()
