@@ -48,7 +48,7 @@ func getVersion(commitMessageFile string) (string, error) {
 	}
 
 	if nil != global {
-		if nil != local {
+		if nil != local && localVersion != "" {
 			if localVersion == globalVersion && globalVersion == "" {
 				return "", errors.New("you have to provide versions for global and local config")
 			}
