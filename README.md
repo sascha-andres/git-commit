@@ -31,6 +31,14 @@ Both files have the same structure.
     occurs:                              # Match somewhere, check for existence
       - TICKET-[0-9]+                    # have a TICKET-1 as a match
 
+    external-tools:                      # external tools to run before accepting commit
+      - severity: error                  # on error fail commit, else print with severity attached
+        name: linter                     # name of rule
+        command:                         # command to execute
+          - make
+          - lint
+
+
 ## Installation
 
 Put the binary into your path.
@@ -57,6 +65,9 @@ Essentially this just removes the hook, so it would remove any other hook also. 
 
 |Version|Description|
 |---|---|
+|0.6.0|remove v1|
+||run external tools|
+||fix: version check|
 |0.5.0|version 2 of configuration|
 ||Naming of rules|
 ||Severity for rules|

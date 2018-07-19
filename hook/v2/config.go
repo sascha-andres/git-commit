@@ -9,29 +9,27 @@ import (
 	"livingit.de/code/git-commit/hook/config"
 )
 
-const configFileName = ".commit-hook.yaml"
-
 // LoadConfig handles global and local configuration
 func LoadConfig() (*Configuration, error) {
-	config, err := loadGlobalConfig()
+	cfg, err := loadGlobalConfig()
 	if err != nil {
 		return nil, err
 	}
 
 	commitMessageFile := os.Args[1]
-	prjConfig, err := loadProjectConfiguration(commitMessageFile, config)
+	prjConfig, err := loadProjectConfiguration(commitMessageFile, cfg)
 	if err != nil {
 		return nil, err
 	}
 
-	if config == nil {
-		config = prjConfig
+	if cfg == nil {
+		cfg = prjConfig
 	}
 
-	if nil == config {
+	if nil == cfg {
 		return nil, errors.New("no suitable configuration found")
 	}
-	return config, nil
+	return cfg, nil
 }
 
 // loadProjectConfiguration loads a project specific configuration

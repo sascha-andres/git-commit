@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	"livingit.de/code/git-commit/hook/config"
-	"livingit.de/code/git-commit/hook/v1"
 	"livingit.de/code/git-commit/hook/v2"
 	"livingit.de/code/versioned"
 )
@@ -25,11 +24,11 @@ func NewForVersion(commitMessageFile string) (Validator, error) {
 	}
 	switch version {
 	case "1":
-		return v1.LoadConfig()
+		return nil, errors.New("v1 is removed from utility")
 	case "2":
 		return v2.LoadConfig()
 	case "":
-		return v1.LoadConfig()
+		return v2.LoadConfig()
 	}
 	return nil, fmt.Errorf("no version %s known", version)
 }
@@ -49,7 +48,7 @@ func getVersion(commitMessageFile string) (string, error) {
 	}
 
 	if nil != global {
-		if nil != local {
+		if nil != local && localVersion != "" {
 			if localVersion == globalVersion && globalVersion == "" {
 				return "", errors.New("you have to provide versions for global and local config")
 			}

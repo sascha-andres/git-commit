@@ -13,5 +13,6 @@ func (cfg *Configuration) Validate(commitMessage []string) (bool, error) {
 	result := cfg.validateSubjectLine(filteredMessage[0])
 	result = cfg.validateBody(filteredMessage) && result
 	result = cfg.validateOccurs(filteredMessage) && result
+	result = cfg.runExternalTools() && result
 	return result, nil
 }

@@ -1,9 +1,24 @@
 ---
-version: 2
-
 body-required: true
 
 subject:
-    - severity: warning
-      expression: ^[0-9]+
-      name: useless warning for a test
+  - severity: warning
+    expression: ^[0-9]+
+    name: useless warning for a test
+
+external-tools:
+  - severity: error
+    name: gofmt
+    command:
+      - make
+      - fmt-run
+  - severity: error
+    name: unit tests
+    command:
+      - make
+      - test
+  - severity: error
+    name: linter
+    command:
+      - make
+      - lint
