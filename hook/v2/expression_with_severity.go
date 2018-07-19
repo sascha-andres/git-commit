@@ -1,6 +1,8 @@
 package v2
 
-import "regexp"
+import (
+	"regexp"
+)
 
 func (e *ExpressionWithSeverity) setup() error {
 	if err := e.compile(); err != nil {

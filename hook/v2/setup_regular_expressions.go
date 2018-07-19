@@ -52,7 +52,7 @@ func loadExpressions(expressions []string) ([]*regexp.Regexp, error) {
 }
 
 // loadExpressionsWithSeverity compiles a list of regular expressions with severity
-func loadExpressionsWithSeverity(expressions []ExpressionWithSeverity) error {
+func loadExpressionsWithSeverity(expressions []*ExpressionWithSeverity) error {
 	if len(expressions) > 0 {
 		for _, expr := range expressions {
 			err := expr.setup()
