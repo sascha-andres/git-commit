@@ -28,7 +28,8 @@ type (
 	// ExpressionWithSeverity is a container for expressions that may be errors or warnings
 	ExpressionWithSeverity struct {
 		Expression string `yaml:"expression"` // Regular expression
-		Severity   string `yaml:"severity"`   // severity name
+		Severity   string `yaml:"severity"`   // Severity name
+		Name       string `yaml:"name"`       // Name of expression
 
 		compiled *regexp.Regexp
 	}

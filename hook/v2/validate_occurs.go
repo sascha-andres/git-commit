@@ -15,7 +15,7 @@ func (cfg *Configuration) validateOccurs(commitMessage []string) bool {
 			}
 		}
 		if !localOK {
-			fmt.Println(fmt.Sprintf("%s: nothing found that matches [%s]", r.Severity, r.Expression))
+			fmt.Println(fmt.Sprintf("%s: nothing found that matches: [%s]", r.Severity, r.Name))
 			result = result && r.Severity != ErrorSeverity
 		}
 	}

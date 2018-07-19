@@ -15,7 +15,7 @@ func (cfg *Configuration) validateSubjectLine(subjectLine string) bool {
 	}
 	for _, r := range cfg.SubjectExpressions {
 		if !r.match([]byte(subjectLine)) {
-			fmt.Println(fmt.Sprintf("%s: [%s] does not match [%s]", r.Severity, subjectLine, r.Expression))
+			fmt.Println(fmt.Sprintf("%s: [%s] does not match: [%s]", r.Severity, subjectLine, r.Name))
 			result = result && r.Severity != ErrorSeverity
 		}
 	}

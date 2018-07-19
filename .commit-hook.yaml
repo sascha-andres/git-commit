@@ -6,3 +6,4 @@ body-required: true
 subject:
     - severity: warning
       expression: ^[0-9]+
+      name: useless warning for a test
