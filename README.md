@@ -12,7 +12,7 @@ Both files have the same structure.
 
     ---
     
-    version: 1                           # version of config file
+    version: 2                           # version of config file
     
     subject-line-length: 50              # Length of the subject line at a maximum
     body-required: false                 # Is a body required for a commit
@@ -23,8 +23,10 @@ Both files have the same structure.
     ignore:                              # a list of regular expressions to ignore lines (no check)
       - ^#.*                             # ignore comments
     
-    subject:                             # Match the subject against those expressions
-      - ^[a-z]+(\([a-z]+\))?:.*[^\.]$    # have feat(web): bla match, no . at the end allowed
+    subject:                                         # Match the subject against those expressions
+      - name: ensure tagging of subject              # Name of rule
+        expression: ^[a-z]+(\([a-z]+\))?:.*[^\.]$    # have feat(web): bla match, no . at the end allowed
+        severity: error                              # on error fail commit, else print with severity attached
     
     occurs:                              # Match somewhere, check for existence
       - TICKET-[0-9]+                    # have a TICKET-1 as a match
@@ -55,6 +57,9 @@ Essentially this just removes the hook, so it would remove any other hook also. 
 
 |Version|Description|
 |---|---|
+|0.5.0|version 2 of configuration|
+||Naming of rules|
+||Severity for rules|
 |0.4.0|add version to config file|
 |0.3.1|integration with code quality tools|
 |0.3.0|print version information|
