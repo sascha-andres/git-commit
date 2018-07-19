@@ -1,3 +1,5 @@
+.PHONY: test
+
 setup: ## Install all the build and lint dependencies
 	go get -u gopkg.in/alecthomas/gometalinter.v2
 	go get -u github.com/golang/dep/cmd/dep

@@ -1,28 +1,47 @@
 package v2
 
+import (
+	"bytes"
+	"fmt"
+	"os/exec"
+	"syscall"
+)
+
 // runExternalTools iterates over external tools to validate commit
 func (cfg *Configuration) runExternalTools() bool {
-	return true
+	result := true
+	for _, val := range cfg.Externals {
+		cmd := exec.Command(val.Command[0], val.Command[1:]...)
+
+		var stdout, stderr bytes.Buffer
+		cmd.Stdout = &stdout
+		cmd.Stderr = &stderr
+
+		if err := cmd.Start(); err != nil {
+			fmt.Println(fmt.Sprintf("error: unable to start [%s]: %s", val.Name, err.Error()))
+			result = false
+		} else {
+			if err := cmd.Wait(); err != nil {
+				if exitError, ok := err.(*exec.ExitError); ok {
+					fmt.Println("output:")
+					fmt.Println()
+					fmt.Println(stdout.String())
+
+					fmt.Println("error:")
+					fmt.Println()
+					fmt.Println(stderr.String())
+					if _, ok := exitError.Sys().(syscall.WaitStatus); ok {
+						if val.Severity == ErrorSeverity {
+							result = false
+						}
+						fmt.Println(fmt.Sprintf("%s: execution of [%s] failed", val.Severity, val.Name))
+					}
+				} else {
+					fmt.Println(fmt.Sprintf("error: unable to start [%s]: %s", val.Name, err.Error()))
+					result = false
+				}
+			}
+		}
+	}
+	return result
 }
-
-/*cmd := exec.Command("git", "blub")
-
-  if err := cmd.Start(); err != nil {
-      log.Fatalf("cmd.Start: %v")
-  }
-
-  if err := cmd.Wait(); err != nil {
-      if exiterr, ok := err.(*exec.ExitError); ok {
-          // The program has exited with an exit code != 0
-
-          // This works on both Unix and Windows. Although package
-          // syscall is generally platform dependent, WaitStatus is
-          // defined for both Unix and Windows and in both cases has
-          // an ExitStatus() method with the same signature.
-          if status, ok := exiterr.Sys().(syscall.WaitStatus); ok {
-              log.Printf("Exit Status: %d", status.ExitStatus())
-          }
-      } else {
-          log.Fatalf("cmd.Wait: %v", err)
-      }
-  }*/

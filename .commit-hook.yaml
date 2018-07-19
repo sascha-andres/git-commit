@@ -13,7 +13,7 @@ external-tools:
       - make
       - fmt-run
   - severity: error
-    name: gofmt
+    name: unit tests
     command:
       - make
       - test

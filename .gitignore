@@ -69,3 +69,4 @@ fabric.properties
 
 .build/
 dist/
+coverage.txt
