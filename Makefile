@@ -15,6 +15,9 @@ cover: test ## Run all the tests and opens the coverage report
 fmt: ## gofmt and goimports all go files
 	find . -name '*.go' -not -wholename './vendor/*' | while read -r file; do gofmt -w -s "$$file"; goimports -w "$$file"; done
 
+fmt-run: ## run gofmt all go files without changing
+	find . -name '*.go' -not -wholename './vendor/*' | while read -r file; do gofmt -l -s "$$file"; done
+
 lint:  fmt ## Run all the linters
 	gometalinter --vendor --disable-all \
 		--enable=deadcode \
