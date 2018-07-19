@@ -22,26 +22,31 @@ func (cfg *Configuration) runExternalTools() bool {
 			result = false
 		} else {
 			if err := cmd.Wait(); err != nil {
-				if exitError, ok := err.(*exec.ExitError); ok {
-					fmt.Println("output:")
-					fmt.Println()
-					fmt.Println(stdout.String())
-
-					fmt.Println("error:")
-					fmt.Println()
-					fmt.Println(stderr.String())
-					if _, ok := exitError.Sys().(syscall.WaitStatus); ok {
-						if val.Severity == ErrorSeverity {
-							result = false
-						}
-						fmt.Println(fmt.Sprintf("%s: execution of [%s] failed", val.Severity, val.Name))
-					}
-				} else {
-					fmt.Println(fmt.Sprintf("error: unable to start [%s]: %s", val.Name, err.Error()))
-					result = false
-				}
+				result = val.handleExecuteError(stdout, stderr, err) && result
 			}
 		}
 	}
 	return result
+}
+
+// handleExecuteError does the lifting for an execute error
+func (val *Tool) handleExecuteError(stdout, stderr bytes.Buffer, err error) bool {
+	if exitError, ok := err.(*exec.ExitError); ok {
+		fmt.Println("output:")
+		fmt.Println()
+		fmt.Println(stdout.String())
+
+		fmt.Println("error:")
+		fmt.Println()
+		fmt.Println(stderr.String())
+		if _, ok := exitError.Sys().(syscall.WaitStatus); ok {
+			fmt.Println(fmt.Sprintf("%s: execution of [%s] failed", val.Severity, val.Name))
+			if val.Severity != ErrorSeverity {
+				return true
+			}
+		}
+	} else {
+		fmt.Println(fmt.Sprintf("error: unable to start [%s]: %s", val.Name, err.Error()))
+	}
+	return false
 }
