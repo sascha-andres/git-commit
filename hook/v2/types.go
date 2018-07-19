@@ -14,6 +14,7 @@ type (
 		IgnoreExpressions         []string                  `yaml:"ignore"`                   // IgnoreExpressions is a list of regular expressions that determine whether a line should be checked or not
 		SubjectExpressions        []*ExpressionWithSeverity `yaml:"subject"`                  // SubjectExpressions is a list of regular expressions to check the first line
 		FindOccurrenceExpressions []*ExpressionWithSeverity `yaml:"occurs"`                   // FindOccurrenceExpressions is a list of expressions that have to match at least once
+		Externals                 []*Tool                   `yaml:"external-tools"`           // Externals is a list of tools to call before accepting a commit
 		SubjectLineLength         int                       `yaml:"subject-line-length"`      // SubjectLineLength provides the ability to limit the subject line's length
 		BodyRequired              bool                      `yaml:"body-required"`            // BodyRequired forces a body if set
 		SeparateBody              bool                      `yaml:"separate-body"`            // SeparateBody forces a blank line between subject and body
@@ -32,5 +33,12 @@ type (
 		Name       string `yaml:"name"`       // Name of expression
 
 		compiled *regexp.Regexp
+	}
+
+	// Tool is a description how to run external tool for commit
+	Tool struct {
+		Command  []string `yaml:"command"`  // Command to execute
+		Name     string   `yaml:"name"`     // Name of rule
+		Severity string   `yaml:"severity"` // Severity name
 	}
 )
