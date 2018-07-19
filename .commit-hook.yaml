@@ -2,3 +2,7 @@
 version: 2
 
 body-required: true
+
+subject:
+    - severity: warning
+      expression: ^[0-9]+

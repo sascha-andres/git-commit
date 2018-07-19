@@ -1,11 +1,7 @@
 package v2
 
 import (
-	"fmt"
 	"os"
-	"path/filepath"
-
-	"path"
 
 	"github.com/imdario/mergo"
 	"github.com/pkg/errors"
@@ -40,13 +36,7 @@ func LoadConfig() (*Configuration, error) {
 
 // loadProjectConfiguration loads a project specific configuration
 func loadProjectConfiguration(commitMessageFile string, globalConfig *Configuration) (*Configuration, error) {
-	projectPath, err := filepath.Abs(path.Join(filepath.Dir(commitMessageFile), ".."))
-	if err != nil {
-		return nil, err
-	}
-
-	localConfig := fmt.Sprintf("%s/%s", projectPath, configFileName)
-	data, err := config.LoadProjectConfigFileContent(localConfig)
+	data, err := config.LoadProjectConfigFileContent(commitMessageFile)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +49,7 @@ func loadProjectConfiguration(commitMessageFile string, globalConfig *Configurat
 		if nil == globalConfig {
 			return &cfg, nil
 		}
-		if err := mergo.Merge(globalConfig, cfg); err != nil {
+		if err := mergo.Merge(globalConfig, cfg, mergo.WithAppendSlice); err != nil {
 			return nil, err
 		}
 	}
