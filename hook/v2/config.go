@@ -34,24 +34,23 @@ func LoadConfig() (*Configuration, error) {
 
 // loadProjectConfiguration loads a project specific configuration
 func loadProjectConfiguration(commitMessageFile string, globalConfig *Configuration) (*Configuration, error) {
+	var err error
 	data, err := config.LoadProjectConfigFileContent(commitMessageFile)
-	if err != nil {
-		return nil, err
-	}
-	if data != nil {
+	if err == nil && data != nil {
 		var cfg Configuration
 		err = yaml.Unmarshal(data, &cfg)
 		if err != nil {
 			return nil, err
 		}
-		if nil == globalConfig {
-			return &cfg, nil
-		}
-		if err := mergo.Merge(globalConfig, cfg, mergo.WithAppendSlice); err != nil {
-			return nil, err
+		if nil != globalConfig {
+			if err = mergo.Merge(globalConfig, cfg, mergo.WithAppendSlice); err != nil {
+				globalConfig = nil
+			}
+		} else {
+			globalConfig = &cfg
 		}
 	}
-	return globalConfig, nil
+	return globalConfig, err
 }
 
 // loadGlobalConfig loads the global configuration if present

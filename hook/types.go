@@ -47,6 +47,11 @@ func getVersion(commitMessageFile string) (string, error) {
 		return "", err
 	}
 
+	return optimisticVersion(global, local, globalVersion, localVersion)
+}
+
+// optimisticVersion returns the calculated optimistic version
+func optimisticVersion(global, local []byte, globalVersion, localVersion string) (string, error) {
 	if nil != global {
 		if nil != local && localVersion != "" {
 			if localVersion == globalVersion && globalVersion == "" {
