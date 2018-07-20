@@ -49,7 +49,7 @@ Put the binary into your path.
 
 The application has a helper to install the hook:
 
-    git-commit-hook install
+    git-hook-commit install
 
 You need to run this in the root of your project ( the folder containing the `.git` folder ). If there is an existing hook you have to force it ( `-f` ).
 
@@ -57,7 +57,7 @@ You need to run this in the root of your project ( the folder containing the `.g
 
 Similar to the installation process, there is an uninstall helper:
 
-    git-commit-hook uninstall
+    git-hook-commit uninstall
 
 Essentially this just removes the hook, so it would remove any other hook also. So be careful.
 

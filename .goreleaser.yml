@@ -1,6 +1,6 @@
 project_name: git-commit
 builds:
-  - binary: git-commit-hook
+  - binary: git-hook-commit
     main: ./cmd/main.go
     goos:
       - windows
@@ -15,12 +15,6 @@ checksum:
   name_template: "{{ .ProjectName }}_checksums.txt"
 
 snapshot:
-  # Allows you to change the name of the generated snapshot
-  # releases. The following variables are available:
-  # - Commit
-  # - Tag
-  # - Timestamp
-  # Default is `SNAPSHOT-{{.Commit}}`.
   name_template: SNAPSHOT-{{.Commit}}
 
 nfpm:

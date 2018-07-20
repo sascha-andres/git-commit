@@ -11,7 +11,7 @@ import (
 // Install activates hook for project
 func Install(gitFolderPath string) error {
 	var forceOverwrite bool
-	flagSet := flag.NewFlagSet("git-commit-hook install", flag.ContinueOnError)
+	flagSet := flag.NewFlagSet("git-hook-commit install", flag.ContinueOnError)
 	flagSet.BoolVar(&forceOverwrite, "f", false, `force file creation by overwriting`)
 	err := flagSet.Parse(os.Args[2:])
 	if err != nil {
