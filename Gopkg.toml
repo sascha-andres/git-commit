@@ -41,6 +41,10 @@
   name = "gopkg.in/yaml.v2"
   version = "2.2.1"
 
+[[constraint]]
+  name = "livingit.de/code/go-hookhelper"
+  version = "0.1.0"
+
 [prune]
   go-tests = true
   unused-packages = true

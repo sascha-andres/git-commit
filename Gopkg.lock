@@ -26,6 +26,12 @@
   version = "v2.2.1"
 
 [[projects]]
+  name = "livingit.de/code/go-hookhelper"
+  packages = ["."]
+  revision = "8271b504d319691690f673cd07e05be638d95df4"
+  version = "0.1.0"
+
+[[projects]]
   name = "livingit.de/code/versioned"
   packages = ["."]
   revision = "bcebc3ea7ebc449e4e00eed5e0eae80df2e5b679"
@@ -34,6 +40,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "67d9f4ba14859b517224764934a28345465d5fcb14925413d070c02d6a3d19c0"
+  inputs-digest = "91c02958be7074fa146ce76e315828829f294a46ff85ebcb52c3262539443bb7"
   solver-name = "gps-cdcl"
   solver-version = 1
