@@ -6,6 +6,7 @@ import (
 
 	"livingit.de/code/git-commit/hook/config"
 	"livingit.de/code/git-commit/hook/v2"
+	"livingit.de/code/go-hookhelper"
 	"livingit.de/code/versioned"
 )
 
@@ -47,28 +48,7 @@ func getVersion(commitMessageFile string) (string, error) {
 		return "", err
 	}
 
-	return optimisticVersion(global, local, globalVersion, localVersion)
-}
-
-// optimisticVersion returns the calculated optimistic version
-func optimisticVersion(global, local []byte, globalVersion, localVersion string) (string, error) {
-	if nil != global {
-		if nil != local && localVersion != "" {
-			if localVersion == globalVersion && globalVersion == "" {
-				return "", errors.New("you have to provide versions for global and local config")
-			}
-			if localVersion != globalVersion {
-				return "", errors.New("version mismatch for global and project version")
-			}
-		}
-		return globalVersion, nil
-	}
-
-	if nil != local {
-		return localVersion, nil
-	}
-
-	return "", errors.New("no suitable versioned configuration found")
+	return hookhelper.OptimisticVersion(global, local, globalVersion, localVersion)
 }
 
 // getLocalVersion returns version data from project configuration

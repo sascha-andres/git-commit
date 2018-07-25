@@ -1,6 +1,6 @@
 <!--
 
-Have you read git-commit's Code of Conduct? By filing an Issue, you are expected to comply with it, including treating everyone with respect
+Have you read git-hook-commit's Code of Conduct? By filing an Issue, you are expected to comply with it, including treating everyone with respect
 
 -->
 
@@ -33,7 +33,7 @@ Have you read git-commit's Code of Conduct? By filing an Issue, you are expected
 
 ### Versions
 
-You can get this information by starting `git-commit-hook`. Also, please include the OS and what version of the OS you're running.
+You can get this information by starting `git-hook-commit`. Also, please include the OS and what version of the OS you're running.
 
 ### Additional Information
 

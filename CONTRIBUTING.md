@@ -1,8 +1,8 @@
-# Contributing to git-commit
+# Contributing to git-hook-commit
 
 First off, thanks for taking the time to contribute!
 
-The following is a set of guidelines for contributing to git-commit, which is hosted on GitHub. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
+The following is a set of guidelines for contributing to git-hook-commit, which is hosted on GitHub. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
 
 Please note: I have taken the CONTRIBUTING.md from [Atom](https://github.com/atom/atom/blob/master/CONTRIBUTING.md) as a base for this document.
 
@@ -23,18 +23,18 @@ Please note: I have taken the CONTRIBUTING.md from [Atom](https://github.com/ato
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the [git-commit Code of Conduct](code_of_conduct.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [sascha.andres@outlook.com](sascha.andres@outlook.com).
+This project and everyone participating in it is governed by the [git-hook-commit Code of Conduct](code_of_conduct.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [sascha.andres@outlook.com](sascha.andres@outlook.com).
 
 ## What should I know before I get started?
 
-git-commit is a small open source project &mdash; it started because I wanted to have a configurable git commit hook.
+git-hook-commit is a small open source project &mdash; it started because I wanted to have a configurable git commit hook.
 
 
 ## How Can I Contribute?
 
 ### Reporting Bugs
 
-This section guides you through submitting a bug report for git-commit. Following these guidelines helps maintainers and the community understand your report, reproduce the behavior, and find related reports.
+This section guides you through submitting a bug report for git-hook-commit. Following these guidelines helps maintainers and the community understand your report, reproduce the behavior, and find related reports.
 
 Before creating bug reports, please check [this list](#before-submitting-a-bug-report) as you might find out that you don't need to create one. When you are creating a bug report, please [include as many details as possible](#how-do-i-submit-a-good-bug-report). Fill out [the required template](ISSUE_TEMPLATE.md), the information it asks for helps us resolve issues faster.
 
@@ -51,7 +51,7 @@ Bugs are tracked as [GitHub issues](https://guides.github.com/features/issues/).
 Explain the problem and include additional details to help maintainers reproduce the problem:
 
 * **Use a clear and descriptive title** for the issue to identify the problem.
-* **Describe the exact steps which reproduce the problem** in as many details as possible. For example, start by explaining how you started git-commit, e.g. which command exactly you used in the terminal, or how you started git-commit otherwise. When listing steps, **don't just say what you did, but explain how you did it**.
+* **Describe the exact steps which reproduce the problem** in as many details as possible. For example, start by explaining how you started git-hook-commit, e.g. which command exactly you used in the terminal, or how you started git-hook-commit otherwise. When listing steps, **don't just say what you did, but explain how you did it**.
 * **Provide specific examples to demonstrate the steps**. Include links to files or GitHub projects, or copy/pasteable snippets, which you use in those examples. If you're providing snippets in the issue, use [Markdown code blocks](https://help.github.com/articles/markdown-basics/#multiple-lines).
 * **Describe the behavior you observed after following the steps** and point out what exactly is the problem with that behavior.
 * **Explain which behavior you expected to see instead and why.**
@@ -59,19 +59,19 @@ Explain the problem and include additional details to help maintainers reproduce
 
 Provide more context by answering these questions:
 
-* **Did the problem start happening recently** (e.g. after updating to a new version of git-commit) or was this always a problem?
-* If the problem started happening recently, **can you reproduce the problem in an older version of git-commit?** What's the most recent version in which the problem doesn't happen? You can download older versions of git-commit from [the releases page](https://github.com/sascha-andres/git-commit/releases).
+* **Did the problem start happening recently** (e.g. after updating to a new version of git-hook-commit) or was this always a problem?
+* If the problem started happening recently, **can you reproduce the problem in an older version of git-hook-commit?** What's the most recent version in which the problem doesn't happen? You can download older versions of git-hook-commit from [the releases page](https://github.com/sascha-andres/git-commit/releases).
 * **Can you reliably reproduce the issue?** If not, provide details about how often the problem happens and under which conditions it normally happens.
 
 Include details about your configuration and environment:
 
-* **Which version of git-commit are you using?** You can get the exact version by running `git-commit` in your terminal
+* **Which version of git-hook-commit are you using?** You can get the exact version by running `git-hook-commit` in your terminal
 * **What's the name and version of the OS you're using**?
 * **Are you using local configuration files?**
 
 ### Suggesting Enhancements
 
-This section guides you through submitting an enhancement suggestion for git-commit, including completely new features and minor improvements to existing functionality. Following these guidelines helps maintainers and the community understand your suggestion and find related suggestions.
+This section guides you through submitting an enhancement suggestion for git-hook-commit, including completely new features and minor improvements to existing functionality. Following these guidelines helps maintainers and the community understand your suggestion and find related suggestions.
 
 When you are creating an enhancement suggestion, please [include as many details as possible](#how-do-i-submit-a-good-enhancement-suggestion). Fill in [the template](ISSUE_TEMPLATE.md), including the steps that you imagine you would take if the feature you're requesting existed.
 
@@ -82,9 +82,9 @@ When you are creating an enhancement suggestion, please [include as many details
 * **Provide a step-by-step description of the suggested enhancement** in as many details as possible.
 * **Provide specific examples to demonstrate the steps**. Include copy/pasteable snippets which you use in those examples, as [Markdown code blocks](https://help.github.com/articles/markdown-basics/#multiple-lines).
 * **Describe the current behavior** and **explain which behavior you expected to see instead** and why.
-* **Include screenshots and animated GIFs** which help you demonstrate the steps or point out the part of git-commit which the suggestion is related to. You can use [this tool](http://www.cockos.com/licecap/) to record GIFs on macOS and Windows, and [this tool](https://github.com/colinkeenan/silentcast) or [this tool](https://github.com/GNOME/byzanz) on Linux.
-* **Explain why this enhancement would be useful** to most git-commit users
-* **Specify which version of git-commit you're using.** You can get the exact version by running `git-commit-hook` in your terminal
+* **Include screenshots and animated GIFs** which help you demonstrate the steps or point out the part of git-hook-commit which the suggestion is related to. You can use [this tool](http://www.cockos.com/licecap/) to record GIFs on macOS and Windows, and [this tool](https://github.com/colinkeenan/silentcast) or [this tool](https://github.com/GNOME/byzanz) on Linux.
+* **Explain why this enhancement would be useful** to most git-hook-commit users
+* **Specify which version of git-hook-commit you're using.** You can get the exact version by running `git-hook-commit` in your terminal
 * **Specify the name and version of the OS you're using.**
 
 ### Pull Requests

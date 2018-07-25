@@ -15,9 +15,9 @@ We must be able to understand the design of your change from this description. I
 
 <!-- Explain what other alternates were considered and why the proposed version was selected -->
 
-### Why should this be in git-commit?
+### Why should this be in git-hook-commit?
 
-<!-- Explain why this functionality should be in git-commit -->
+<!-- Explain why this functionality should be in git-hook-commit -->
 
 ### Benefits
 
