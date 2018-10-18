@@ -1,6 +1,7 @@
 # git-commit
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/sascha-andres/git-commit)](https://goreportcard.com/report/github.com/sascha-andres/git-commit) [![Maintainability](https://api.codeclimate.com/v1/badges/89c3d725bc80fe513869/maintainability)](https://codeclimate.com/github/sascha-andres/git-commit/maintainability) [![codebeat badge](https://codebeat.co/badges/e26b8c40-1ada-41b7-82c6-4dd7e96edde0)](https://codebeat.co/projects/github-com-sascha-andres-git-commit-master)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fsascha-andres%2Fgit-commit.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fsascha-andres%2Fgit-commit?ref=badge_shield)
 
 This project is a configurable commit-msg hook. You can either configure using a global configuration file of a repository configuration file. If both exist, repository file will be merged into global configuration file.
 
@@ -81,3 +82,7 @@ Essentially this just removes the hook, so it would remove any other hook also. 
 ||fix: project configuration now correctly located in repository root|
 ||fix: run subject line length|
 |0.1.0|Initial version|
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fsascha-andres%2Fgit-commit.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fsascha-andres%2Fgit-commit?ref=badge_large)
