@@ -65,6 +65,7 @@ Essentially this just removes the hook, so it would remove any other hook also. 
 
 |Version|Description|
 |---|---|
+|0.8.0|add support for Co-authored-by|
 |0.7.0|rename binary|
 |0.6.2|code quality improvements|
 |0.6.1|code quality improvements|

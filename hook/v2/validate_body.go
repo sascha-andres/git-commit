@@ -1,11 +1,18 @@
 package v2
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 // validateBody runs all rules for a commit message body
 func (cfg *Configuration) validateBody(commitMessage []string) bool {
 	result := true
 	for _, line := range commitMessage {
+		if strings.HasPrefix(line, "Co-authored-by") {
+			fmt.Println("Co-authored-by found, not checking line length")
+			continue
+		}
 		if len(line) > cfg.BodyLineLength {
 			if cfg.EnforceBodyLineLength {
 				result = false
