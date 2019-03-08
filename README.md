@@ -19,6 +19,8 @@ Both files have the same structure.
     separate-body: true                  # Should the body be separated by a blank line
     body-line-length: 72                 # Maximum length of body lines
     enforce-body-line-length: true       # Should too long body lines be treated as an error or as a warning
+    lint_gitlab_ci: true                 # If true this calls out to lint .gitlab-ci.yml files
+    gitlab_ci_file: relativePath         # Set a different CI file location
     
     ignore:                              # a list of regular expressions to ignore lines (no check)
       - ^#.*                             # ignore comments
@@ -41,7 +43,7 @@ Both files have the same structure.
 
 ## Installation
 
-Put the binary into your path.
+Put the binary into your path. If you want to use GitLab CI linting you need to use: https://gitlab.com/orobardet/gitlab-ci-linter
 
 ## Use
 
