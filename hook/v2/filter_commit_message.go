@@ -8,6 +8,7 @@ func (cfg *Configuration) filterCommitMessage(commitMessage []string) ([]string,
 		for _, r := range cfg.ignoreCompiled {
 			if !r.Match([]byte(line)) {
 				result = append(result, line)
+				break
 			}
 		}
 	}
