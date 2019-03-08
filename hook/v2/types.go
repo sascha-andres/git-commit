@@ -21,6 +21,8 @@ type (
 		BodyLineLength            int                       `yaml:"body-line-length"`         // BodyLineLength provides the ability to limit the body lines' length
 		EnforceBodyLineLength     bool                      `yaml:"enforce-body-line-length"` // EnforceBodyLineLength determines whether to print a warning when body line length it too long or to error
 		ExternalChecks            []string                  `yaml:"calls"`                    // ExternalChecks contains a list of commands to execute
+		LintGitLabCI              bool                      `yaml:"lint_gitlab_ci"`           // LintGitLabCI determines whether gitlab-ci-linter will be called
+		GitLabCIFile              string                    `yaml:"gitlab_ci_file"`           // GitLabCIFile use this to override .gitlab-ci.yml location
 
 		ignoreCompiled []*regexp.Regexp
 	}

@@ -14,5 +14,7 @@ func (cfg *Configuration) Validate(commitMessage []string) (bool, error) {
 	result = cfg.validateBody(filteredMessage) && result
 	result = cfg.validateOccurs(filteredMessage) && result
 	result = cfg.runExternalTools() && result
+	result = cfg.validateGitLabCI() && result
+
 	return result, nil
 }
