@@ -17,6 +17,7 @@ gopkg.in/yaml.v2 v2.2.2 h1:ZCJp+EgiOT7lHqUV2J862kp8Qj64Jo6az82+3Td9dZw=
 gopkg.in/yaml.v2 v2.2.2/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
 livingit.de/code/go-hookhelper v0.0.0-20180725060324-8271b504d319 h1:d3rzDWHLfy4IxOsgLLyJVcRR/5SLIJ6dO3tRfOSKtNg=
 livingit.de/code/go-hookhelper v0.0.0-20180725060324-8271b504d319/go.mod h1:b0HDCpoQmdFIH7nYLCmI6ozW9ByeHU4onwV0nIYXLVo=
+livingit.de/code/go-hookhelper v1.0.0 h1:TaD+88W4q+AqV0RqEj9BbCICR9cz21L5IG2K1Vi6eIs=
 livingit.de/code/go-hookhelper v1.0.0/go.mod h1:L5lfocB/MU6W7GYmScDDk1weZpm+WoevZVvDOYq2fG4=
 livingit.de/code/versioned v1.0.1 h1:24Ub5ASjRKZW5scJrtufmeIXYHqeOdbmyq/CAknBI68=
 livingit.de/code/versioned v1.0.1/go.mod h1:1QJll3WWZrRvd3cRjeedXN3EgMilHcfeCl/EduD1gRY=

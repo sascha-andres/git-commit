@@ -68,6 +68,7 @@ Essentially this just removes the hook, so it would remove any other hook also. 
 
 |Version|Description|
 |---|---|
+|1.0.0|update to use go modules|
 |0.9.0|add support for GitLab CI linter|
 ||fix a bug where body lines where multiplied by the number of ignore expressions|
 |0.8.0|add support for Co-authored-by|
