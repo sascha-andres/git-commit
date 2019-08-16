@@ -12,7 +12,7 @@ import (
 func UninstallHook() int {
 	err := subcommands.Uninstall(".git")
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "error:", err)
+		_, _ = fmt.Fprintln(os.Stderr, "error:", err)
 		return 1
 	}
 	return 0
@@ -23,11 +23,11 @@ func InstallHook() int {
 	if helper.DirectoryExists(".git") {
 		err := subcommands.Install(".git")
 		if err != nil {
-			fmt.Fprintln(os.Stderr, "error:", err)
+			_, _ = fmt.Fprintln(os.Stderr, "error:", err)
 			return 1
 		}
 	} else {
-		fmt.Fprintln(os.Stderr, "error: no git repository")
+		_, _ = fmt.Fprintln(os.Stderr, "error: no git repository")
 		return 1
 	}
 	return 0

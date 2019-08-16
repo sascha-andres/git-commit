@@ -17,8 +17,3 @@ external-tools:
     command:
       - make
       - test
-  - severity: error
-    name: linter
-    command:
-      - make
-      - lint
