@@ -20,4 +20,4 @@ jobs:
       id: go
 
     - name: Build
-      run: make build
+      run: make snapshot
