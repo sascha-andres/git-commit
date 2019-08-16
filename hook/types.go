@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"livingit.de/code/git-commit/hook/config"
-	"livingit.de/code/git-commit/hook/v2"
+	v2 "livingit.de/code/git-commit/hook/v2"
 	"livingit.de/code/go-hookhelper"
 	"livingit.de/code/versioned"
 )

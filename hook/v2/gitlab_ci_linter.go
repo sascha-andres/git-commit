@@ -12,11 +12,15 @@ func (cfg *Configuration) validateGitLabCI() (result bool) {
 		return true
 	}
 
+	if !ciConfigExists() && cfg.GitLabCIFile == "" {
+		return true
+	}
+
 	var (
 		cmd *exec.Cmd
 	)
 
-	fmt.Println("running GitLab CI linter")
+	_, _ = fmt.Println("running GitLab CI linter")
 
 	pathToLinter, err := exec.LookPath("gitlab-ci-linter")
 	if err != nil {
@@ -44,4 +48,12 @@ func (cfg *Configuration) validateGitLabCI() (result bool) {
 	}
 
 	return true
+}
+
+func ciConfigExists() bool {
+	info, err := os.Stat(".gitlab-ci.yml")
+	if os.IsNotExist(err) {
+		return false
+	}
+	return !info.IsDir()
 }
