@@ -1,10 +1,10 @@
 ---
-body-required: true
+body-required: false
 
 subject:
   - severity: warning
-    expression: ^[0-9]+
-    name: useless warning for a test
+    expression: "^[a-z]{1,6}:"
+    name: prefixed line
 
 external-tools:
   - severity: error
