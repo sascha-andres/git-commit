@@ -1,6 +1,8 @@
 ---
 body-required: false
 
+lint_gitlab_ci: false
+
 subject:
   - severity: warning
     expression: "^[a-z]{1,6}:"
