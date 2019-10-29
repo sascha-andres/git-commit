@@ -64,5 +64,5 @@ func printOutput(stdout, stderr bytes.Buffer) {
 
 	fmt.Println("error:")
 	fmt.Println()
-	fmt.Fprintln(os.Stderr, stderr.String())
+	_, _ = fmt.Fprintln(os.Stderr, stderr.String())
 }
