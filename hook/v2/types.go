@@ -23,6 +23,7 @@ type (
 		ExternalChecks            []string                  `yaml:"calls"`                    // ExternalChecks contains a list of commands to execute
 		LintGitLabCI              bool                      `yaml:"lint_gitlab_ci"`           // LintGitLabCI determines whether gitlab-ci-linter will be called
 		GitLabCIFile              string                    `yaml:"gitlab_ci_file"`           // GitLabCIFile use this to override .gitlab-ci.yml location
+		ConfDDirectoriesEnabled   bool                      `yaml:"confd-directories"`        // are .commit-msg.d directories enabled
 
 		ignoreCompiled []*regexp.Regexp
 	}
