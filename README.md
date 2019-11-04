@@ -22,6 +22,7 @@ Both files have the same structure.
     enforce-body-line-length: true       # Should too long body lines be treated as an error or as a warning
     lint_gitlab_ci: true                 # If true this calls out to lint .gitlab-ci.yml files
     gitlab_ci_file: relativePath         # Set a different CI file location
+    confd-directories                    # Specify whether .commit-msg.d directory is used
     
     ignore:                              # a list of regular expressions to ignore lines (no check)
       - ^#.*                             # ignore comments
@@ -68,6 +69,7 @@ Essentially this just removes the hook, so it would remove any other hook also. 
 
 |Version|Description|
 |---|---|
+||Add support for conf.d directory|
 |1.0.1|better gitlab ci handling|
 |1.0.0|update to use go modules|
 |0.9.0|add support for GitLab CI linter|
