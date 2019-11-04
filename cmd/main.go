@@ -71,21 +71,21 @@ func validate() bool {
 	commitMessageFile := os.Args[1]
 	config, err := hook.NewForVersion(commitMessageFile)
 	if err != nil {
-		fmt.Fprintln(os.Stderr, err)
+		_, _ = fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 		return false
 	}
 
 	commitFileContent, err := loadCommitMessageFile(commitMessageFile)
 	if err != nil {
-		fmt.Fprintln(os.Stderr, err)
+		_, _ = fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 		return false
 	}
 
 	ok, err := config.Validate(commitFileContent)
 	if err != nil {
-		fmt.Fprintln(os.Stderr, err)
+		_, _ = fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 		return false
 	}
@@ -98,12 +98,12 @@ func validate() bool {
 func validateInput() int {
 	commitMessageFile := os.Args[1]
 	if commitMessageFile == "" {
-		fmt.Fprintln(os.Stderr, errors.New("no commit message file passed as parameter 1"))
+		_, _ = fmt.Fprintln(os.Stderr, errors.New("no commit message file passed as parameter 1"))
 		return 1
 	}
 
 	if !helper.FileExists(commitMessageFile) {
-		fmt.Fprintln(os.Stderr, errors.New("passed commit message file not found"))
+		_, _ = fmt.Fprintln(os.Stderr, errors.New("passed commit message file not found"))
 		return 1
 	}
 	return 0

@@ -1,12 +1,5 @@
 .PHONY: test
 
-setup: ## Install all the build and lint dependencies
-	go get -u gopkg.in/alecthomas/gometalinter.v2
-	go get -u github.com/golang/dep/cmd/dep
-	go get -u golang.org/x/tools/cmd/goimports
-	dep ensure
-	gometalinter --install --update
-
 test: ## Run all the tests
 	rm -f coverage.tmp && rm -f coverage.txt
 	echo 'mode: atomic' > coverage.txt && go list ./... | xargs -n1 -I{} sh -c 'go test -race -covermode=atomic -coverprofile=coverage.tmp {} && tail -n +2 coverage.tmp >> coverage.txt' && rm coverage.tmp
