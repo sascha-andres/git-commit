@@ -69,7 +69,7 @@ Essentially this just removes the hook, so it would remove any other hook also. 
 
 |Version|Description|
 |---|---|
-||Add support for conf.d directory|
+|1.1.0|Add support for conf.d directory|
 |1.0.1|better gitlab ci handling|
 |1.0.0|update to use go modules|
 |0.9.0|add support for GitLab CI linter|
